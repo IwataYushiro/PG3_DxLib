@@ -18,9 +18,6 @@ SceneManager* SceneManager::GetInstance()
 
 void SceneManager::SceneChange(int sceneNo)
 {
-	sceneNo++;
-	if (sceneNo <= 4)
-	{
-		sceneNo = 0;
-	}
+	scene = sceneNo;
+
 }

@@ -2,7 +2,7 @@
 #include "SceneManager.h"
 
 // ウィンドウのタイトルに表示する文字列
-const char TITLE[] = "xx2x_xx_ナマエ: タイトル";
+const char TITLE[] = "LE2C_03_イワタユウシロウ_PG3";
 
 // ウィンドウ横幅
 const int WIN_WIDTH = 600;
@@ -41,15 +41,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 
 	// ゲームループで使う変数の宣言
-	enum Scene
-	{
-		title,
-		newgame,
-		gameplay,
-		gameclear,
-	};
-	int scene = title;
-
+	
 	//インスタンスを取得
 	SceneManager* sm = SceneManager::GetInstance();
 
@@ -74,59 +66,56 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-		switch (scene)
+		switch (sm->GetSceneIndex())
 		{
-		case title:
+		case sm->title:
 
 			if (keys[KEY_INPUT_SPACE] && !oldkeys[KEY_INPUT_SPACE])
 			{
-				sm->SceneChange(scene);
-				scene = newgame;
+				sm->SceneChange(sm->newgame);
+				
 				break;
 			}
 			break;
-		case newgame:
+		case sm->newgame:
 			if (keys[KEY_INPUT_SPACE] && !oldkeys[KEY_INPUT_SPACE])
 			{
-				sm->SceneChange(scene);
-				scene = gameplay;
+				sm->SceneChange(sm->gameplay);
 				break;
 			}
 			break;
-		case gameplay:
+		case sm->gameplay:
 			if (keys[KEY_INPUT_SPACE] && !oldkeys[KEY_INPUT_SPACE])
 			{
-				sm->SceneChange(scene);
-				scene = gameclear;
+				sm->SceneChange(sm->gameclear);
 				break;
 			}
 			break;
-		case gameclear:
+		case sm->gameclear:
 			if (keys[KEY_INPUT_SPACE] && !oldkeys[KEY_INPUT_SPACE])
 			{
-				sm->SceneChange(scene);
-				scene = title;
+				sm->SceneChange(sm->title);
 				break;
 			}
 			break;
 		}
 
 		// 描画処理
-		switch (scene)
+		switch (sm->GetSceneIndex())
 		{
-		case title:
+		case sm->title:
 			DrawString(300, 300, "title\n", GetColor(255, 255, 255));
 			DrawBox(100, 100, 200, 200, GetColor(255, 0, 0), true);
 			break;
-		case newgame:
+		case sm->newgame:
 			DrawString(300, 300, "new game\n", GetColor(255, 255, 255));
 			DrawBox(100, 100, 200, 200, GetColor(0, 255, 0), true);
 			break;
-		case gameplay:
+		case sm->gameplay:
 			DrawString(300, 300, "game play\n", GetColor(255, 255, 255));
 			DrawBox(100, 100, 200, 200, GetColor(0, 0, 255), true);
 			break;
-		case gameclear:
+		case sm->gameclear:
 			DrawString(300, 300, "game clear\n", GetColor(255, 255, 255));
 			DrawBox(100, 100, 200, 200, GetColor(255, 255, 255), true);
 			break;
