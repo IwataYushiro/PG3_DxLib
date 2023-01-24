@@ -11,13 +11,6 @@ Enemy::~Enemy()
 {
 }
 
-Enemy* Enemy::GetInstance()
-{
-	static Enemy instance;
-
-	return &instance;
-}
-
 void Enemy::Dead()
 {
 	isAlive = false;

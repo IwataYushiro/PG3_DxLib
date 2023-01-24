@@ -29,7 +29,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	SetWindowSizeExtendRate(1.0);
 
 	// 画面の背景色を設定する
-	SetBackgroundColor(0x00, 0x00, 0x00);			
+	SetBackgroundColor(0x1f, 0x1e, 0x33);			
 
 	// DXlibの初期化
 	if (DxLib_Init() == -1) { return -1; }
@@ -38,12 +38,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// 画像などのリソースデータの変数宣言と読み込み
-	Enemy* enemy1 = new Enemy();
-	Enemy* enemy2 = new Enemy();
-	Enemy* enemy3 = new Enemy();
+
 
 	// ゲームループで使う変数の宣言
-
+	Enemy* enemy = Enemy::GetInstance();
 
 	// 最新のキーボード情報用
 	char keys[256] = { 0 };
@@ -67,17 +65,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-		if (keys[KEY_INPUT_SPACE] == true && oldkeys[KEY_INPUT_SPACE] == false)
-		{
-			enemy1->Dead();
-		}
+		enemy->Update(keys, oldkeys);
 
 		// 描画処理
-		DrawString(50, 350, "スペースキーを押したら全滅するらしい", GetColor(255, 0, 0));
 
-		enemy1->Draw(100,100);
-		enemy2->Draw(300,100);
-		enemy3->Draw(200,200);
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
 		ScreenFlip();	
@@ -100,9 +91,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	// Dxライブラリ終了処理
 	DxLib_End();
 
-	delete enemy1;
-	delete enemy2;
-	delete enemy3;
 	// 正常終了
 	return 0;
 }

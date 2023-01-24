@@ -1,15 +1,15 @@
 #pragma once
 class Enemy
 {
-private:
+public:
 	Enemy();
 	~Enemy();
+private:
 	const int isNum = 5;
 
 	static bool isAlive;
 
 public:
-	static Enemy* GetInstance();
 	void Dead();
 	void Draw(int x, int y);
 };
