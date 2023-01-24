@@ -67,13 +67,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//---------  ここからプログラムを記述  ----------//
 
 		// 更新処理
-		if (keys[KEY_INPUT_SPACE] == true && oldkeys[KEY_INPUT_SPACE] == false)
+		if (keys[KEY_INPUT_SPACE]&& !oldkeys[KEY_INPUT_SPACE])
 		{
 			enemy1->Dead();
 		}
 
 		// 描画処理
-		DrawString(50, 350, "スペースキーを押したら全滅するらしい", GetColor(255, 0, 0));
+		DrawString(50, 350, "スペースキーを押したら全滅するぞい", GetColor(255, 0, 0));
 
 		enemy1->Draw(100,100);
 		enemy2->Draw(300,100);
